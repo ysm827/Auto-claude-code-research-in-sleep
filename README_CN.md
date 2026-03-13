@@ -244,8 +244,6 @@ NARRATIVE_REPORT.md ──► /paper-plan ──► /paper-figure ──► /pap
 
 </details>
 
-四个 PDF 均保留可对比：`main_round0_original.pdf`、`main_round1.pdf`、`main_round2.pdf`、`main_round3.pdf`。
-
 ---
 
 ## 🧰 全部 Skills

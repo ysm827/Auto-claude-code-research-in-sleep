@@ -302,8 +302,6 @@ After Workflow 3 generates the paper, `/auto-paper-improvement-loop` runs 2 roun
 
 </details>
 
-All four PDFs preserved for comparison: `main_round0_original.pdf`, `main_round1.pdf`, `main_round2.pdf`, `main_round3.pdf`.
-
 ---
 
 ## 🧰 All Skills
