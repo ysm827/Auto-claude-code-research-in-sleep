@@ -165,6 +165,8 @@ claude
 ```
 1. /research-lit "discrete diffusion models"    ← Zotero→Obsidian→本地→网络，整理全景
    /research-lit "topic" — sources: zotero, web  ← 或指定只搜部分源
+   /research-lit "topic" — arxiv download: true   ← 同时下载最相关的 arXiv PDF
+   /arxiv "attention mechanism" — download         ← 独立 arXiv 搜索+下载
 2. /idea-creator "DLLMs post training"     ← 自动生成 8-12 个 idea，筛选排序
 3. 选 top 2-3 个 idea
 4. /novelty-check "top idea"                     ← 查新：有没有人做过？
@@ -305,7 +307,7 @@ NARRATIVE_REPORT.md ──► /paper-plan ──► /paper-figure ──► /pap
 | 💡 [`idea-creator`](skills/idea-creator/SKILL.md) | 给定研究方向，自动生成、筛选、排序研究 idea | 是 |
 | 🔬 [`research-review`](skills/research-review/SKILL.md) | 单轮深度评审（外部 LLM，xhigh 推理） | 是 |
 | 🔁 [`auto-review-loop`](skills/auto-review-loop/SKILL.md) | 多轮自动 review→修复→再 review 循环（最多 4 轮） | 是 |
-| 📚 [`research-lit`](skills/research-lit/SKILL.md) | 搜索 [Zotero](#-zotero-集成可选) + [Obsidian](#-obsidian-集成可选) + 本地 PDF + 网络，分析相关工作、找空白 | 否（可选：Zotero/Obsidian MCP） |
+| 📚 [`research-lit`](skills/research-lit/SKILL.md) | 搜索 [Zotero](#-zotero-集成可选) + [Obsidian](#-obsidian-集成可选) + 本地 PDF + [arXiv API](#arxiv-集成) + 网络，分析相关工作、找空白 | 否（可选：Zotero/Obsidian MCP） |
 | 📊 [`analyze-results`](skills/analyze-results/SKILL.md) | 分析实验结果、统计、生成对比表 | 否 |
 | 👀 [`monitor-experiment`](skills/monitor-experiment/SKILL.md) | 监控实验进度、收集结果 | 否 |
 | 🔍 [`novelty-check`](skills/novelty-check/SKILL.md) | 查新：验证研究 idea 是否已有人做过 | 是 |
@@ -463,6 +465,24 @@ cp -r obsidian-skills/.claude /path/to/your/vault/
 **不用 Obsidian？** 没关系——`/research-lit` 自动跳过，照常工作。
 
 > 💡 **Zotero + Obsidian 同时使用**：很多研究者用 Zotero 存论文、Obsidian 记笔记。两个集成可以同时工作——`/research-lit` 先查 Zotero（原始论文 + 标注），再查 Obsidian（加工后笔记），再查本地 PDF，最后搜网络。
+
+#### arXiv 集成
+
+`/research-lit` 自动通过 arXiv API 获取结构化元数据（标题、摘要、完整作者列表、分类），比网页搜索片段更丰富。无需额外配置。
+
+默认只获取元数据（不下载文件）。如需同时下载最相关的 PDF：
+
+```
+/research-lit "topic" — arxiv download: true                    # 下载 top 5 篇 PDF
+/research-lit "topic" — arxiv download: true, max download: 10  # 下载至多 10 篇
+```
+
+也可使用独立的 [`/arxiv`](skills/arxiv/SKILL.md) skill 直接搜索和下载：
+
+```
+/arxiv "attention mechanism"           # 搜索
+/arxiv "2301.07041" — download         # 下载指定论文
+```
 
 </details>
 

@@ -362,7 +362,7 @@ After Workflow 3 generates the paper, `/auto-paper-improvement-loop` runs 2 roun
 | 💡 [`idea-creator`](skills/idea-creator/SKILL.md) | Generate and rank research ideas given a broad direction (brainstorm + filter + validate) | Yes |
 | 🔬 [`research-review`](skills/research-review/SKILL.md) | Single-round deep review from external LLM (xhigh reasoning) | Yes |
 | 🔁 [`auto-review-loop`](skills/auto-review-loop/SKILL.md) | Autonomous multi-round review→fix→re-review loop (max 4 rounds) | Yes |
-| 📚 [`research-lit`](skills/research-lit/SKILL.md) | Scan [Zotero](#-zotero-integration-optional) + [Obsidian](#-obsidian-integration-optional) + local PDFs + web search, analyze related work, find gaps | No (Optional: Zotero/Obsidian MCP) |
+| 📚 [`research-lit`](skills/research-lit/SKILL.md) | Scan [Zotero](#-zotero-integration-optional) + [Obsidian](#-obsidian-integration-optional) + local PDFs + [arXiv API](#arxiv-integration) + web search, analyze related work, find gaps | No (Optional: Zotero/Obsidian MCP) |
 | 📊 [`analyze-results`](skills/analyze-results/SKILL.md) | Analyze experiment results, compute statistics, generate insights | No |
 | 👀 [`monitor-experiment`](skills/monitor-experiment/SKILL.md) | Monitor running experiments, check progress, collect results | No |
 | 🔍 [`novelty-check`](skills/novelty-check/SKILL.md) | Verify research idea novelty against recent literature before implementing | Yes |
@@ -426,6 +426,8 @@ cp -r skills/research-lit ~/.claude/skills/
 > /idea-discovery "your research direction"          # full pipeline
 > /research-lit "topic"                              # just literature survey (all sources)
 > /research-lit "topic" — sources: zotero, web        # mix and match sources
+> /research-lit "topic" — arxiv download: true         # also download top arXiv PDFs
+> /arxiv "discrete diffusion" — download               # standalone arXiv search + download
 > /idea-creator "topic"                              # just brainstorm
 
 # Workflow 2: Auto Research Loop
@@ -547,6 +549,24 @@ cp -r obsidian-skills/.claude /path/to/your/vault/
 **Not using Obsidian?** No problem — `/research-lit` automatically skips Obsidian and works as before.
 
 > 💡 **Zotero + Obsidian together**: Many researchers use Zotero for paper storage and Obsidian for notes. Both integrations work simultaneously — `/research-lit` checks Zotero first (raw papers + annotations), then Obsidian (your processed notes), then local PDFs, then web search.
+
+#### arXiv Integration
+
+`/research-lit` automatically queries the arXiv API for structured metadata (title, abstract, full author list, categories) — richer than web search snippets. No setup required.
+
+By default, only metadata is fetched (no files downloaded). To also download the most relevant PDFs:
+
+```
+/research-lit "topic" — arxiv download: true              # download top 5 PDFs
+/research-lit "topic" — arxiv download: true, max download: 10  # download up to 10
+```
+
+For standalone arXiv access, use the dedicated [`/arxiv`](skills/arxiv/SKILL.md) skill:
+
+```
+/arxiv "attention mechanism"           # search
+/arxiv "2301.07041" — download         # download specific paper
+```
 
 </details>
 
