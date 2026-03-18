@@ -147,19 +147,37 @@ claude
 
 > 💡 **使用方法：** 社区 skill 不会自动接入核心工作流。使用时，让你的执行者（Claude Code / OpenClaw 等）先读一遍该 skill 的 `SKILL.md`，再根据下方描述接入对应的工作流阶段。
 
-| 类型 | 名称 | 领域 | 描述 | Codex MCP？ |
-|------|------|------|------|-----------|
-| Skill | 🏗️ [`dse-loop`](skills/dse-loop/SKILL.md) | 体系结构 / EDA | 自动设计空间探索——迭代运行、分析、调参（gem5、Yosys 等）。适用于任何有可调参数的领域 | 否 |
-| Skill | 🤖 [`idea-discovery-robot`](skills/idea-discovery-robot/SKILL.md) | 机器人 / 具身智能 | 工作流 1 适配版——按 embodiment、benchmark、sim2real 路径和安全约束生成、筛选 idea | 是 |
-| Skill | 🔬 [`research-refine`](skills/research-refine/SKILL.md) | 通用 | 把模糊 idea 精炼成问题锚点明确、可实现、可评审的方法方案。最适合插在 `/idea-discovery` 和 `/auto-review-loop` 之间 | 是 |
-| Skill | 🧪 [`experiment-plan`](skills/experiment-plan/SKILL.md) | 通用 | 把已定型的方法方案变成 claim-driven 的实验路线图，补齐 ablation、预算和执行顺序 | 否 |
-| Skill | 🧭 [`research-refine-pipeline`](skills/research-refine-pipeline/SKILL.md) | 通用 | 一条龙串联：`/research-refine` → `/experiment-plan`，同时完成方法定型和实验规划 | 是 |
-| External | 🛡️ [open-source-hardening-skills](https://github.com/zeyuzhangzyz/open-source-hardening-skills) | DevOps / 开源 | 10 个 skill 流水线，将研究代码加固为生产级开源项目——审计、重构、测试、CI、文档、review。ARIS 研究完成后的下一步 | 是 |
-| Skill | 📐 [`proof-writer`](skills/proof-writer/SKILL.md) | ML 理论 | 严格的定理/引理证明撰写——可行性分类、依赖图谱、诚实的阻塞报告。搭配工作流 3（`/paper-writing`）写理论章节，或工作流 2（`/auto-review-loop`）修补 reviewer 指出的证明漏洞 | 否 |
-| Skill | 📝 [`grant-proposal`](skills/grant-proposal/SKILL.md) | 通用 | 基金申请书撰写（科研費/NSF/国自然/ERC/DFG/SNSF/ARC/NWO）。串联 `/research-lit` → `/novelty-check` → `/research-review` → `/paper-illustration` | 是 |
-| Skill | 📡 [`comm-lit-review`](skills/comm-lit-review/SKILL.md) | 通信 / 无线 | 通信领域专用文献检索——IEEE/ACM/ScienceDirect 优先、venue 分层、PHY/MAC/transport/NTN 分类 | 否 |
-| External | 📊 [CitationClaw](https://github.com/VisionXLab/CitationClaw) | 通用 | 引用影响力分析——输入论文标题 → 引用爬取、学者识别、分层统计、HTML 报告 | 否 |
-| Docs | 🐾 [OpenClaw 适配指南](docs/OPENCLAW_ADAPTATION.md) | 通用 | 在 [OpenClaw](https://github.com/All-Hands-AI/OpenHands) 中使用 ARIS 工作流方法论——skill 到阶段映射、文件化编排，无需 Claude Code CLI | 否 |
+**社区 Skills（8 个）：** 方案精炼、实验规划、基金申请书、定理证明、通信领域文献检索、架构设计空间探索（EDA）、机器人 idea 发现、AI 作图。
+
+**外部项目 & 文档（4 个）：** 开源加固流水线、引用影响力分析、OpenClaw 适配指南、AI 学术插图。
+
+<details>
+<summary><b>社区 Skills（8 个）</b> — 点击展开</summary>
+
+| 名称 | 领域 | 描述 | Codex MCP？ |
+|------|------|------|-----------|
+| 🔬 [`research-refine`](skills/research-refine/SKILL.md) | 通用 | 把模糊 idea 精炼成问题锚点明确、可实现的方法方案 | 是 |
+| 🧪 [`experiment-plan`](skills/experiment-plan/SKILL.md) | 通用 | claim-driven 实验路线图，含 ablation、预算和执行顺序 | 否 |
+| 🧭 [`research-refine-pipeline`](skills/research-refine-pipeline/SKILL.md) | 通用 | 一条龙：`/research-refine` → `/experiment-plan` | 是 |
+| 📝 [`grant-proposal`](skills/grant-proposal/SKILL.md) | 通用 | 基金申请书（科研費/NSF/国自然/ERC/DFG/SNSF/ARC/NWO） | 是 |
+| 📐 [`proof-writer`](skills/proof-writer/SKILL.md) | ML 理论 | 严格定理/引理证明撰写——可行性分类、依赖图谱 | 否 |
+| 📡 [`comm-lit-review`](skills/comm-lit-review/SKILL.md) | 通信 / 无线 | 通信领域文献检索——IEEE/ACM 优先、venue 分层、PHY/MAC/NTN 分类 | 否 |
+| 🏗️ [`dse-loop`](skills/dse-loop/SKILL.md) | 体系结构 / EDA | 自动设计空间探索——迭代调参（gem5、Yosys 等） | 否 |
+| 🤖 [`idea-discovery-robot`](skills/idea-discovery-robot/SKILL.md) | 机器人 / 具身智能 | 工作流 1 适配版——按 embodiment、sim2real、安全约束筛选 idea | 是 |
+
+</details>
+
+<details>
+<summary><b>外部项目 & 文档（4 个）</b> — 点击展开</summary>
+
+| 名称 | 领域 | 描述 |
+|------|------|------|
+| 🛡️ [open-source-hardening-skills](https://github.com/zeyuzhangzyz/open-source-hardening-skills) | DevOps / 开源 | 10 个 skill 流水线，将研究代码加固为生产级开源项目 |
+| 📊 [CitationClaw](https://github.com/VisionXLab/CitationClaw) | 通用 | 引用影响力分析——论文标题 → 引用爬取、学者识别、HTML 报告 |
+| 🐾 [OpenClaw 适配指南](docs/OPENCLAW_ADAPTATION.md) | 通用 | 在 [OpenClaw](https://github.com/All-Hands-AI/OpenHands) 中使用 ARIS 工作流 |
+| 🎨 [`paper-illustration`](skills/paper-illustration/SKILL.md) | 通用 | AI 生成架构图（Gemini）。基于 [PaperBanana](https://github.com/dwzhu-pku/PaperBanana)，集成到工作流 3 |
+
+</details>
 
 ## 🔄 工作流
 
