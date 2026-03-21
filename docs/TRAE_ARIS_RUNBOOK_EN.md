@@ -38,12 +38,12 @@ Method 2: Manual copy to skills directory
 
 ```powershell
 # Global installation (available in all projects)
-mkdir -p %USERPROFILE%\.trae\skills
-cp -r /path/to/Auto-claude-code-research-in-sleep/skills/* %USERPROFILE%\.trae\skills\
+New-Item -ItemType Directory -Path "$env:USERPROFILE\.trae\skills" -Force
+Copy-Item -Path "C:\path\to\Auto-claude-code-research-in-sleep\skills\*" -Destination "$env:USERPROFILE\.trae\skills\" -Recurse -Force
 
 # Project-level installation (available only in current project)
-mkdir -p .trae/skills
-cp -r /path/to/Auto-claude-code-research-in-sleep/skills/* .trae/skills/
+New-Item -ItemType Directory -Path ".\.trae\skills" -Force
+Copy-Item -Path "C:\path\to\Auto-claude-code-research-in-sleep\skills\*" -Destination ".\.trae\skills\" -Recurse -Force
 ```
 
 After installation, simply describe your needs in natural language within the corresponding scope to trigger the relevant skill.
